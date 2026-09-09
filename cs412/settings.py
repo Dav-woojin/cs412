@@ -26,7 +26,10 @@ SECRET_KEY = "django-insecure-*xyf+)n(+01sukp4pj&-3%1ugmv^vx7v&ks%3x0@m%)e0@)%)d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cs-webapps.bu.edu']
+ALLOWED_HOSTS = [
+    "cs-webapps.bu.edu",
+    "localhost",
+]
 
 
 # Application definition
@@ -38,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "hw",
+    "cs412.quotes",
 ]
 
 MIDDLEWARE = [
@@ -58,6 +63,7 @@ TEMPLATES = [
         "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
+            "string_if_invalid": "WARNING: {{%s}} not a valid context variable",
             "context_processors": [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -127,19 +133,24 @@ MAILERS = {
     },
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = 'static/' # note: no leading slash!
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "static/"  # note: no leading slash!
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL= "media/"  # note: no leading slash!
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_URL = "media/"  # note: no leading slash!
 
 import socket
-CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'
+
+CS_DEPLOYMENT_HOSTNAME = "cs-webapps.bu.edu"
 
 if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
-    STATIC_URL = '/dwjchung/static/'
-    MEDIA_URL = '/dwjchung/media/'
+    STATIC_URL = "/dwjchung/static/"
+    MEDIA_URL = "/dwjchung/media/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]

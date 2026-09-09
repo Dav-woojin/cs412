@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <head>
+        <title>Quotes Show all</title>
+    </head>
+    <body>
+        <ul>
+            {% for image in images %}
+            <li><img src = "{{image}}"></li>
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for quote in quotes %}
+            <li>{{quote}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+<html>
+    <head>
+        <title>Quote Generator</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <footer>
+            The quote of the day is... {{rquote}}. <br>
+            This was said by <br>
+            <img src = {{rimage}} width = "300" height = "300">
+        </footer>
+        
+    </body>
+</html>
+{%endblock%}
