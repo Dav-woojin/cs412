@@ -1,3 +1,11 @@
+<!--
+    David Chung
+    dwjchung@bu.edu
+    This is the quote.html file, which effectively determines how the main page will look.
+    It displays one quote and one image, both randomly chosen, while extending a base file
+    that contains links to other pages.
+-->
+
 {% extends 'base.html' %}
 {% load static %}
 
@@ -8,11 +16,12 @@
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
-        <footer>
-            The quote of the day is... {{rquote}}. <br>
-            This was said by <br>
+        <p>
+            <p>The quote of the day is... <br>
+            {{rquote}}. </p><br>
+            This was said by: <br>
             <img src = {{rimage}} width = "300" height = "300">
-        </footer>
+        </p>
         
     </body>
 </html>

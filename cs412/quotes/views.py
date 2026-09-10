@@ -1,3 +1,6 @@
+#David Chung, dwjchung@bu.edu
+#this is the views.py file, in which we are trying to determine what exactly each template will do.
+
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 import random
@@ -14,6 +17,8 @@ imagelist = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_CK-RrD3Q-C
 # Create your views here.
 
 def quote(request):
+    #This function returns quote.html as our template, while also providing context 
+    #template variables that provide a random quote and image for quote.html to use
     template_name = 'quote.html'
     context = {
     "rquote": quotelist[random.randint(0,2)],
@@ -23,6 +28,8 @@ def quote(request):
 
 
 def show_all(request):
+    #This function returns show_all.html as our template, while also providing context 
+    #template variables that provide the entire lists of quotes and images for show_all.html to use
     template_name = 'show_all.html'
     context = {
     "quotes": quotelist,
@@ -31,21 +38,7 @@ def show_all(request):
     return render(request, template_name, context)
 
 def about(request):
-     
-    #response_text = f'''
-    #<html>
-    #<h1>Hello, this is an about page dedicated to Maya Angelou, the speaker of these quotes</h1>
-
-    #<p>Maya Angelou (1928–2014) was an iconic American poet, memoirist, and civil rights activist 
-    #best known for her groundbreaking 1969 memoir, I Know Why the Caged Bird Sings.</p>
-    #<p>This page was made by David Chung, a very middling full stack engineer at best</p>
-    #</html>
-    #'''
-
+    #This function returns about.html as our template
     template_name = 'about.html'
-    context = {
-    "rquote": quotelist[random.randint(0,2)],
-    "rimage": imagelist[random.randint(0,2)],
-    }
-    return render(request, template_name, context)
+    return render(request, template_name)
  

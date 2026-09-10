@@ -1,3 +1,6 @@
+#David Chung, dwjchung@bu.edu
+#These are the urlpatterns that we will need to run our quotes app
+
 from django.urls import path
 from django.conf import settings
 from . import views
