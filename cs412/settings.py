@@ -152,5 +152,4 @@ if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
     MEDIA_URL = "/dwjchung/media/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
