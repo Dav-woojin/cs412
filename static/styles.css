@@ -83,13 +83,13 @@ section {
     padding-bottom: 4px;
 }
 
-
+/*
 nav {
     justify-self: end;
     background: none;
     color: darkblue;
     /* border: 1px solid; */
-}
+/*}
 
 nav li {
     display: inline-block;
@@ -105,6 +105,7 @@ nav button {
     font-size: 1.2 em;
 }
 
+/*
 .mc-table {
     display: table;
     width: 100%;
@@ -114,7 +115,7 @@ nav button {
 
 .mc-table-head {
     border: 1px dashed darkblue;    /*border around each row */
-    display: table-row;
+    /*display: table-row;
     font-size: 1.2em;
 }
 
@@ -131,7 +132,7 @@ nav button {
 .mc-table-row  {
     display: table-row;
     border: 1px dashed darkblue;    /*border around each row */
-    background-color: white;
+    /*background-color: white;
 }
 
 
@@ -148,7 +149,7 @@ nav button {
 }
 
 /* must have no space before :hover */
-.mc-table-row:hover {
+/*.mc-table-row:hover {
     background-color: aliceblue;    
     border: 1px solid;
 }
@@ -156,10 +157,11 @@ nav button {
 .site-form {
     margin-top: 10px;
     /* border: 2px solid darkblue; */
-    padding: 10px;
+    /*padding: 10px;
 }
 
 /* style the forms with class site-form */
+/*
 .site-form input, .site-form textarea, .site-form select {
     display: block;
     margin: 5px 0 0 0;
@@ -167,6 +169,7 @@ nav button {
 }
 
 /* style the submit button ; didn't quite work?? */
+/*
 .site-form input [type="submit"] {
     background: slategray;
     border: 0;
@@ -178,6 +181,7 @@ nav button {
 
 
 /* style the help text in the forms */
+/*
 .helptext, .helptext.ul {
     margin-top: 0 auto;
     bottom: 20px;
@@ -186,6 +190,7 @@ nav button {
 }
 
 /* style the error list in the forms validation */
+/*
 .errorlist li {
     padding: 10px;
     list-style-type: none;
@@ -201,7 +206,7 @@ nav button {
 
 
 /* responsive styles when width is less than 1400px */
-@media screen and (max-width: 560px) {
+/*@media screen and (max-width: 560px) {
     header h1 {
         size: 0.8em;
     }
@@ -220,9 +225,9 @@ nav button {
         cursor: pointer; 
         border: 0;
         font-size: 20px;
-    }
+    }*/
     /* on mobile, display image as max 95% of available width*/
-    img {
+    /*img {
         max-width: 95%;
     }
-}
+}*/

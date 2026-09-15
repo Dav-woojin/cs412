@@ -19,7 +19,7 @@ imagelist = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_CK-RrD3Q-C
 def quote(request):
     #This function returns quote.html as our template, while also providing context 
     #template variables that provide a random quote and image for quote.html to use
-    template_name = 'quote.html'
+    template_name = 'quotes/quote.html'
     context = {
     "rquote": quotelist[random.randint(0,2)],
     "rimage": imagelist[random.randint(0,2)],
@@ -30,7 +30,7 @@ def quote(request):
 def show_all(request):
     #This function returns show_all.html as our template, while also providing context 
     #template variables that provide the entire lists of quotes and images for show_all.html to use
-    template_name = 'show_all.html'
+    template_name = 'quotes/show_all.html'
     context = {
     "quotes": quotelist,
     "images": imagelist,
@@ -39,6 +39,6 @@ def show_all(request):
 
 def about(request):
     #This function returns about.html as our template
-    template_name = 'about.html'
+    template_name = 'quotes/about.html'
     return render(request, template_name)
  
