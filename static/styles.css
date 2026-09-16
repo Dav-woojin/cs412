@@ -1,26 +1,28 @@
 body {
-    background-color: #fff;
-    color: slategray;
-    font-family: arial;
+    background-color: lightblue;
+    color: darkred;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 1.5;
 }
 
 h1,h2,h3,h4,h5{
     font-weight: normal;
-    background:aliceblue;
+    background:lightblue;
     margin: 0;
 }
 
+
 a, a:visited {
-    color: slategrey;
+    color: darkred;
     text-decoration: none;
 }
 
-a:hover {
-    color: darkblue;
+/* a:hover {
+    color: darkred;
     text-decoration: none;
     background-color: white;
-    /* font-weight: bold; */
-}
+
+} */
 
 body {
     max-width: 960px;
@@ -32,11 +34,11 @@ header {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background:aliceblue;
-    position: fixed;
+    background:plum;
+    position: center;
     top: 0px;
     z-index: 999;
-    /* padding-right: 50px auto; */
+
 }
 
 footer {
@@ -47,17 +49,15 @@ footer {
 }
 
 
-.wrapper {              /* centering and margin around whole wrapper element */
+.wrapper {              
     border: 2px solid;
     max-width: 100%;
     position: relative;
     top: 50px;
     scroll-padding-top: 100px;
-    /* scroll-padding-bottom: 100px; */
+
     padding-bottom: 50px;
     
-    /* top:100px; */
-    /* bottom: 100px; */
 }
 
 
@@ -78,23 +78,25 @@ div.wrapper h2 {
 
 
 section {
-    border: 2px solid darkblue;    /* border around each event */
+    border: 2px solid darkblue;   
     position: relative;
     padding-bottom: 4px;
-}
+} 
 
-/*
+
+
 nav {
-    justify-self: end;
-    background: none;
-    color: darkblue;
+    justify-self: center;
+    background: lightblue;
+    color: darkred;
     /* border: 1px solid; */
-/*}
+}
 
 nav li {
     display: inline-block;
     margin-left: 20px;
 }
+
 
 nav button {
     background: none;
@@ -105,7 +107,7 @@ nav button {
     font-size: 1.2 em;
 }
 
-/*
+
 .mc-table {
     display: table;
     width: 100%;
@@ -115,7 +117,7 @@ nav button {
 
 .mc-table-head {
     border: 1px dashed darkblue;    /*border around each row */
-    /*display: table-row;
+    display: table-row;
     font-size: 1.2em;
 }
 
@@ -132,7 +134,7 @@ nav button {
 .mc-table-row  {
     display: table-row;
     border: 1px dashed darkblue;    /*border around each row */
-    /*background-color: white;
+    background-color: white;
 }
 
 
