@@ -4,15 +4,21 @@ import time
 
 # Create your views here.
 
+#David Chung
+#dwjchung@bu.edu
+#this is our views file, containing functions for each major component of our restuarant app
 specialslist = ["Chicken Parmigiana", "Chicken Piccata", "Salmone Arrosto", "Lamb Scottadito"]
 specialsprice = ["$31.99", "$31.99", "$34.99", "$31.99"]
 
 def main(request):
+    #our main views function can just return the template for our main page
     '''directs application to main page html'''
     template_name = "restaurant/main.html"
     return render(request, template_name)
 
 def order(request):
+    #the order views function will take a randomized special and its corresponding price from the list above
+    #in addition itll render our order.html file
     template_name = "restaurant/order.html"
     r = random.randint(0,3)
     context = {
@@ -24,11 +30,17 @@ def order(request):
     return render(request, template_name, context)
 
 def confirmation(request):
+    #our confirmation page will render the html, as well as collect the POST information from 
+    #the order form. Itll collect name,phone,email, any special instructions, items,
+    #and flavors for chicken wings if they choose. This function will also hardcode and check
+    #which food items are selected and compute the total for the order
+    #in addition, itll also take a random time between 30 and 60 minutes and add it to our current
+    #time for a projected order pickup time estimate. For some reason, the code is fine, and even
+    #print statements show that the time is correctly being updated(I have screenshot proof!)
+    #for some reason, the hour is not properly displayed.
     template_name = "restaurant/confirmation.html"
 
-    # # read the form data into python variables:
     if request.POST:
- 
         name = request.POST['name']
         phone = request.POST['phone']
         email = request.POST['email']

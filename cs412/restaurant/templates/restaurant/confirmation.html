@@ -1,3 +1,11 @@
+<!--
+    David Chung
+    dwjchung@bu.edu
+    this is the confirmation html file, which displays the confirmation data for the order 
+    for our user. It uses multiple context varables from confirmation in views in order
+    to appropriately use data from the form
+-->
+
 {% extends 'restaurant/base.html' %}
  
  
@@ -29,7 +37,7 @@
             <p>No menu items were selected</p>
         {% endif %}
 
-        Your total is ${{total}}
+        Your total is ${{total}} <br>
         Your order will be ready at {{time_string}}
     </p>
 </div>
