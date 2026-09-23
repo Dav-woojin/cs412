@@ -1,12 +1,12 @@
+#David Chung
+#dwjchung@bu.edu
+#this is our views file, containing functions for each major component of our restuarant app
+
 from django.shortcuts import render
 import random
 import time
 
 # Create your views here.
-
-#David Chung
-#dwjchung@bu.edu
-#this is our views file, containing functions for each major component of our restuarant app
 specialslist = ["Chicken Parmigiana", "Chicken Piccata", "Salmone Arrosto", "Lamb Scottadito"]
 specialsprice = ["$31.99", "$31.99", "$34.99", "$31.99"]
 
