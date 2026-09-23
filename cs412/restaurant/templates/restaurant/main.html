@@ -1,0 +1,39 @@
+<!--the main html page, displays name, location, hours of operation
+and one or more photos for the page-->
+
+{% extends 'restaurant/base.html' %}
+ 
+{% block content %}
+<div>
+    <h1>
+        Trattoria Il Panino<br>
+        <img src = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/cf/65/5f/nice.jpg?w=1200&h=1200&s=1" height = "300" width = "300">
+    </h1>
+
+    <h2>280 Hanover St, Boston, MA 02113</h2>
+    <table>
+        <h3>Hours of Operation</h3>
+        <tr>
+            <td>Sunday 11AM - 11PM</td>
+        </tr>
+        <tr>
+            <td>Monday 11AM - 11PM</td>
+        </tr>
+        <tr>
+            <td>Tuesday 11AM - 11PM</td>
+        </tr>
+        <tr>
+            <td>Wednesday 11AM - 11PM</td>
+        </tr>
+        <tr>
+            <td>Thursday 11AM - 11PM</td>
+        </tr>
+        <tr>
+            <td>Friday 11AM - 2AM</td>
+        </tr>
+        <tr>
+            <td>Saturday 11AM - 2AM</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

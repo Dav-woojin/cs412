@@ -1,0 +1,57 @@
+{% extends 'restaurant/base.html' %}
+ 
+ 
+{% block content %}
+<div>
+<h1>Order Form</h1>
+ 
+ 
+<form action="{%url 'confirmation' %}" method = "POST">
+    {% csrf_token %}
+    <div>
+        <input type="checkbox" id="firstitem" name="items" value="Chicken Wings"/>
+        <label for="Chicken Wings">Chicken Wings   $20.99</label>
+            <ul>
+                Flavors:
+                <li>
+                    <input type="checkbox" id="option1" name="flavors" value="Plain"/>
+                    <label for="Plain">Plain</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="option2" name="flavors" value="Honey Barbecue"/>
+                    <label for="Honey Barbecue">Honey Barbecue</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="option3" name="flavors" value="Buffalo Style"/>
+                    <label for="Buffalo Style">Buffalo Style</label>
+                </li>
+            </ul>
+    </div>
+    <div>
+        <input type="checkbox" id="seconditem" name="items" value="Boston Bibb"/>
+        <label for="Boston Bibb">Boston Bibb   $14.99</label>
+    </div>
+    <div>
+        <input type="checkbox" id="thirditem" name="items" value="Spaghetti alle Vongole Macchiato"/>
+        <label for="Spaghetti alle Vongole Macchiato">Spaghetti alle Vongole Macchiato   $29.99</label>
+    </div>
+    <div>
+        <input type="checkbox" id= "{{special}}" name=items value= "{{special}}"/>
+        <label for= "{{special}}" >{{special}}  {{sprice}}</label>
+    </div>
+
+    Special Instructions: <input type="text" name="Special Instructions"><br>
+
+    Name: <input type="text" name="name" required><br>
+    
+    Phone: <input type="text" name="phone" required><br>
+
+    Email: <input type="text" name="email" required><br>
+
+    <input type="submit">
+
+ 
+ 
+</form>
+</div>
+{% endblock %}

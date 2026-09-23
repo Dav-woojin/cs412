@@ -23,5 +23,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("hw/", include("hw.urls")),
-    path("quotes/", include("cs412.quotes.urls")), #is this path correct?.. quotes is in cs412 after all opposed to hw
+    path("formdata/", include("formdata.urls")),
+    path("quotes/", include("cs412.quotes.urls")), 
+    path("restaurant/", include("cs412.restaurant.urls")), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

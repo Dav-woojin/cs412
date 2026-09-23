@@ -1,0 +1,21 @@
+body {
+    background-color: cornsilk;
+    color: maroon;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 1.5;
+}
+
+nav {
+    justify-self: right;
+    color: maroon;
+    /* border: 1px solid; */
+}
+
+h1, h2, h3{
+    text-align: center;
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+}

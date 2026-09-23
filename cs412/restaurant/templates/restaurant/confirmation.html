@@ -1,0 +1,36 @@
+{% extends 'restaurant/base.html' %}
+ 
+ 
+{% block content %}
+<div>
+    <h1>Confirmation Page</h1>
+    <p> 
+        Hi, {{name}} <br>
+        Thank you for your order!
+    </p>
+    <p>
+        Your email is {{email}} and phone number is {{phone}} <br>
+        {% if items %}
+            In your order is/are the following:
+            <ul>
+                {% for item in items %}
+                    <li>{{item}}</li>
+                    {% if item == "Chicken Wings" %}
+                    with flavor/flavors: <ul> {% for flavor in flavors %} <li>{{flavor}}</li> {% endfor %}</ul>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            {% if sinstructions %}
+            with special instructions: {{sinstructions}} <br>
+            {% endif %}
+
+        {% else %}
+            <p>No menu items were selected</p>
+        {% endif %}
+
+        Your total is ${{total}}
+        Your order will be ready at {{time_string}}
+    </p>
+</div>
+{% endblock %}
