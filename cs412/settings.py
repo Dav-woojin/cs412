@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     "hw",
     "cs412.quotes",
     "cs412.restaurant",
-    "formdata"
+    "cs412.mini_insta",
+    "formdata",
+    "blog",
 ]
 
 MIDDLEWARE = [

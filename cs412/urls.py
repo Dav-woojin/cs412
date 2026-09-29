@@ -24,6 +24,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("hw/", include("hw.urls")),
     path("formdata/", include("formdata.urls")),
+    path("blog/", include("blog.urls")),
     path("quotes/", include("cs412.quotes.urls")), 
-    path("restaurant/", include("cs412.restaurant.urls")), 
+    path("restaurant/", include("cs412.restaurant.urls")),
+    path("mini_insta/", include("cs412.mini_insta.urls")), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
