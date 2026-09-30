@@ -1,3 +1,7 @@
+<!-- David Chung, dwjchung@bu.edu -->
+<!-- This is our show all profiles html template, which is meant to iterate through
+     all users and present all of the profiels on one page -->
+
 {%extends 'mini_insta/base.html' %}
 
 {%block content%}
@@ -10,6 +14,7 @@
             <h3>by {{profile.display_name}}</h3>
         </div>
 
+        <a href = "{% url 'show_profile' profile.pk %}">
         <img src = "{{profile.profile_image_url}}">
         </a>
 

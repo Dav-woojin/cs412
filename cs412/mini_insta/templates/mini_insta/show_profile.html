@@ -1,0 +1,24 @@
+<!-- David Chung, dwjchung@bu.edu -->
+<!-- This is our show profile html template, this is used to load a single user's profile
+     with all of the appropriate fields -->
+
+{%extends 'mini_insta/base.html' %}
+
+{%block content%}
+<main class = "grid-container">
+    <table>
+        <div>
+            <h2>{{profile.username}}</h2>
+            <h3>by {{profile.display_name}}</h3>
+        </div>
+
+        <img src = "{{profile.profile_image_url}}" width = "800">
+
+        <p>{{profile.bio_text}}</p>
+        <p>this profile was made at {{profile.join_date}}</p>
+
+        
+    </table>
+    <hr>
+</main>
+{%endblock%}

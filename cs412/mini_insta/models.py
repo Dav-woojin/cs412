@@ -1,3 +1,7 @@
+#David Chung, dwjchung@bu.edu
+#In this models file, we create our Profile class that holds all the apropriate info
+#for each user, as well as defining an appropriate to string method for readability in admin
+
 from django.db import models
 
 # Create your models here.
