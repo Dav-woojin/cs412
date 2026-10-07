@@ -18,4 +18,10 @@
         {%block content%}
         {%endblock%}
     </body>
+
+    <nav>
+        {%if profile%}
+        <li><a href = "{%url 'create_post' profile.pk%}">Create a post</a></li>
+        {%endif%}
+    </nav>
 </html>

@@ -6,19 +6,42 @@
 
 {%block content%}
 <main class = "grid-container">
-    <table>
+
+    <article>
+    <h2>{{profile.username}}</h2>
+    
+
+    <img src = "{{profile.profile_image_url}}">
+
+    <hr>
+    <h4>{{profile.username}}'s posts</h4>
+
+    {% for post in profile.get_all_posts %}    
+        {% if post.get_first_photo %}
+            <a href = "{%url 'show_post' post.pk %}">
+            <img src = "{{post.get_first_photo.image_url}}" width = "200">
+            </a>
+        {% else %}
+            <a href = "{%url 'show_post' post.pk %}">
+            <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSKKzAcX4o85e8WqOLI80UB1H5sOOUlwW8XKy8EIxl3Q&s=10" height = "150" width = "150">
+            </a>
+        {% endif %}
+
+    {% endfor %} 
+
+    </article>
+
+    <article>
+        <br><br>
+        <h3>by {{profile.display_name}}</h3>
+
         <div>
-            <h2>{{profile.username}}</h2>
-            <h3>by {{profile.display_name}}</h3>
-        </div>
-
-        <img src = "{{profile.profile_image_url}}" width = "800">
-
         <p>{{profile.bio_text}}</p>
         <p>this profile was made at {{profile.join_date}}</p>
+        </div>
+    </article>
 
-        
-    </table>
-    <hr>
+
+
 </main>
 {%endblock%}

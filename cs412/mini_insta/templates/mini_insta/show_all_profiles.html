@@ -15,12 +15,11 @@
         </div>
 
         <a href = "{% url 'show_profile' profile.pk %}">
-        <img src = "{{profile.profile_image_url}}">
+        <img class = "profile_photos" src = "{{profile.profile_image_url}}" height = "250">
         </a>
-
         
     </article>
-    <hr>
+    <!-- <hr> -->
     {%endfor%}
 </main>
 
