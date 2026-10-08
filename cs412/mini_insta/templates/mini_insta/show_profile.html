@@ -19,7 +19,7 @@
     {% for post in profile.get_all_posts %}    
         {% if post.get_first_photo %}
             <a href = "{%url 'show_post' post.pk %}">
-            <img src = "{{post.get_first_photo.image_url}}" width = "200">
+            <img src = "{{post.get_first_photo.get_image_url}}" width = "200">
             </a>
         {% else %}
             <a href = "{%url 'show_post' post.pk %}">

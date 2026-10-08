@@ -3,14 +3,19 @@
 {%block content%}
 <h1>Create a New Post about {{profile.display_name}}</h1>
 
-<form method = "POST">
+<form method = "POST" enctype="multipart/form-data">
     {% csrf_token %}
+    <div>Choose images: </div>
+    <input type="file" name = "files" multiple><br><br>
+
+    
     <table>
         {{form.as_table}}
     </table>
 
-    <div>Image URL:</div>
-    <input type="text" name="image_url" size="72"><br><br>
+    <!-- <div>Image URL:</div>
+    <input type="text" name="image_url" size="72"><br><br> -->
+
 
     <div>
         <input type="submit" name = "submit" value = "Submit">

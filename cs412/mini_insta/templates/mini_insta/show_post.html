@@ -6,7 +6,7 @@
     <table>
         <h1>{{post.profile}}'s Post</h1>
         {% for photo in post.get_all_photos %}
-            <li><img src="{{ photo.image_url }}" height = "300" width="300"></li>
+            <li><img src="{{ photo.get_image_url }}" height = "300" width="300"></li>
             
         {% endfor %}
         <div>

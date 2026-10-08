@@ -28,4 +28,6 @@ urlpatterns = [
     path("quotes/", include("cs412.quotes.urls")), 
     path("restaurant/", include("cs412.restaurant.urls")),
     path("mini_insta/", include("cs412.mini_insta.urls")), 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
