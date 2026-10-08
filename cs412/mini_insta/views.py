@@ -22,15 +22,18 @@ class ProfileDetailView(DetailView):
     context_object_name = "profile"
 
 class PostDetailView(DetailView):
+    # PostDetailView is created for showing one post at a time in detail
     model = Post
     template_name = "mini_insta/show_post.html"
     context_object_name = "post"
 
 class CreatePostView(CreateView):
+    # this is our main class for creating posts, associated with post form
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
 
     def get_context_data(self):
+        # function to get the right context data, based off which profile this post is being made for
         context = super().get_context_data()
 
         pk = self.kwargs["pk"]
@@ -39,11 +42,9 @@ class CreatePostView(CreateView):
         context['profile'] = profile
         return context
     
-    # def get_success_url(self):
-    #     pk = self.kwargs["pk"]
-    #     return reverse('show_post', kwargs={'pk': pk })
     
     def form_valid(self, form):
+        # form valid function created to appropriately collect the data of the form submission as well as create photo objects from the form
         pk = self.kwargs["pk"]
         profile = Profile.objects.get(pk=pk)
         form.instance.profile = profile
