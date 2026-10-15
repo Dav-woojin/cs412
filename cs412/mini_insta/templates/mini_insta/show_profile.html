@@ -13,6 +13,9 @@
 
     <img src = "{{profile.profile_image_url}}">
 
+    <h3>
+        <a href = "{% url 'update_profile' profile.pk%}">Update Profile</a>
+    </h3>
     <hr>
     <h4>{{profile.username}}'s posts</h4>
 
@@ -28,6 +31,7 @@
         {% endif %}
 
     {% endfor %} 
+
 
     </article>
 
