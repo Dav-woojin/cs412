@@ -25,6 +25,9 @@ class Profile(models.Model):
         posts = Post.objects.filter(profile = self).order_by('timestamp')
         return posts
     
+    def get_absolute_url(self):
+        return reverse("show_profile", kwargs = {'pk': self.pk})
+    
     
 class Post(models.Model):
     profile = models.ForeignKey(Profile, on_delete = models.CASCADE)

@@ -3,9 +3,9 @@
 #here we create classes for our models and their appropriate templates and context variables
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm
+from .forms import CreatePostForm, UpdateProfileForm
 from django.urls import reverse
 
 # Create your views here.
@@ -58,3 +58,9 @@ class CreatePostView(CreateView):
             Photo.objects.create(post = self.object, image_file = file)
 
         return response
+    
+class UpdateProfileView(UpdateView):
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_insta/update_profile_form.html'
+    
