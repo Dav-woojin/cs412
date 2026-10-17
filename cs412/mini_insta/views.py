@@ -107,8 +107,12 @@ class UpdatePostView(UpdateView):
 
 class ShowFollowersDetailView(DetailView):
     context_object_name = "profile"
-    template_name = "show_followers.html"
+    template_name = "mini_insta/show_followers.html"
 
 class ShowFollowingDetailView(DetailView):
     context_object_name = "profile"
-    template_name = "show_following.html"
+    template_name = "mini_insta/show_following.html"
+
+class ShowFeedView(DetailView):
+    model = Profile
+    template_name = "mini_insta/show_feed.html"

@@ -39,6 +39,14 @@ class Profile(models.Model):
     def get_num_following(self):
         return len(Follow.objects.filter(follower_profile = self))
     
+    def get_post_feed(self):
+        combined_result = Post.objects.none()
+        following_profiles = Follow.objects.filter(follower_profile = self)
+        for p in following_profiles:
+            combined_result = combined_result | Post.objects.filter(profile = p.profile)
+
+        return combined_result
+
     
 class Post(models.Model):
     profile = models.ForeignKey(Profile, on_delete = models.CASCADE)
