@@ -105,3 +105,10 @@ class UpdatePostView(UpdateView):
         post = Post.objects.get(pk=pk)
         return reverse('show_post', kwargs={'pk': post.pk })
 
+class ShowFollowersDetailView(DetailView):
+    context_object_name = "profile"
+    template_name = "show_followers.html"
+
+class ShowFollowingDetailView(DetailView):
+    context_object_name = "profile"
+    template_name = "show_following.html"

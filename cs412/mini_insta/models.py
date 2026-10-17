@@ -19,7 +19,6 @@ class Profile(models.Model):
         #tostring method for profile
         return f'{self.username}'
     
-    
     def get_all_posts(self):
         #get all posts method for profile, this is used in order to display all the posts associated with a certain user
         posts = Post.objects.filter(profile = self).order_by('timestamp')
@@ -27,6 +26,18 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return reverse("show_profile", kwargs = {'pk': self.pk})
+    
+    def get_followers(self):
+        return Follow.objects.filter(profile = self)
+    
+    def get_num_followers(self):
+        return len(Follow.objects.filter(profile = self))
+    
+    def get_following(self):
+        return Follow.objects.filter(follower_profile = self)
+    
+    def get_num_following(self):
+        return len(Follow.objects.filter(follower_profile = self))
     
     
 class Post(models.Model):
@@ -56,6 +67,15 @@ class Post(models.Model):
         #provides a return url after we finish a post form submission
         return reverse('show_post', kwargs={'pk': self.pk})
     
+    def get_all_comments(self):
+        return Comment.objects.filter(post = self)
+    
+    def get_likes(self):
+        return Like.objects.filter(post = self)
+    
+    def get_like_count(self):
+        return len(Like.objects.filter(post = self))
+    
 class Photo(models.Model):
     post = models.ForeignKey(Post, on_delete = models.CASCADE)
     image_url = models.URLField(blank = True)
@@ -73,3 +93,31 @@ class Photo(models.Model):
         if self.image_url:
             return self.image_url
         return None
+    
+class Follow(models.Model):
+    profile = models.ForeignKey(Profile, related_name="profile", on_delete = models.CASCADE)
+    follower_profile = models.ForeignKey(Profile, related_name="follower_profile", on_delete = models.CASCADE)
+    timestamp = models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+        return f'{self.follower_profile} follows {self.profile}'
+    
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete = models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete = models.CASCADE)
+    timestamp = models.DateTimeField(auto_now = True)
+    text = models.TextField(blank = True)
+
+    def __str__(self):
+        return f'{self.text}'
+    
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete = models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete = models.CASCADE)
+    timestamp = models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+        return f'{self.profile} likes {self.post}'
+    
+    

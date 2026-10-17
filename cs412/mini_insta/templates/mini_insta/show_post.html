@@ -13,8 +13,16 @@
             
         {% endfor %}
         <div>
+            <h4>Liked by: {{post.get_like_count}} people</h4>
             <p>{{post.caption}}
                 at {{post.timestamp}}</p>
+        </div>
+
+        <div>
+            <h3>Comments:</h3>
+            {% for comment in post.get_all_comments %}
+                <li>{{comment}}</li>
+            {% endfor %}
         </div>
         <br>
         <nav>
