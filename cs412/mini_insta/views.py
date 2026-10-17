@@ -2,10 +2,11 @@
 #this is the views.py file,
 #here we create classes for our models and their appropriate templates and context variables
 
+from typing import Any
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm, UpdateProfileForm
+from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
 from django.urls import reverse
 
 # Create your views here.
@@ -64,3 +65,43 @@ class UpdateProfileView(UpdateView):
     form_class = UpdateProfileForm
     template_name = 'mini_insta/update_profile_form.html'
     
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = "mini_insta/delete_post_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs["pk"]
+        post = self.object
+
+        context['profile'] = post.profile
+        context['post'] = post
+        return context
+    
+    def get_success_url(self):
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+        profile = post.profile
+        return reverse('show_profile', kwargs={'pk': profile.pk })
+    
+class UpdatePostView(UpdateView):
+    model = Post
+    form_class = UpdatePostForm
+    template_name = "mini_insta/update_post_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs["pk"]
+        post = self.object
+
+        context['profile'] = post.profile
+        context['post'] = post
+        return context
+    
+    def get_success_url(self):
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+        return reverse('show_post', kwargs={'pk': post.pk })
+

@@ -16,6 +16,13 @@
             <p>{{post.caption}}
                 at {{post.timestamp}}</p>
         </div>
+        <br>
+        <nav>
+            <a href = "{% url 'update' post.pk %}">Update Post</a>
+        </nav>
+        <nav>
+            <a href = "{% url 'delete' post.pk %}">Delete Post</a>
+        </nav>
     </table>
     <hr>
 </main>
