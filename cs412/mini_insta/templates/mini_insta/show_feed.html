@@ -5,8 +5,45 @@
 <div>
     <h1>Feed</h1>
         {% for post in profile.get_post_feed %}
-            {{post.caption}}<br>
-            <!-- make it so we can see the posts as well, and figureo ut the last rightmost navigation link -->
+            {% if post.get_first_photo %}
+
+                <div>
+                    <img src = "{{post.profile.profile_image_url}}" width = "200">
+                    <p>{{post.profile.username}}'s post</p>
+
+                    <a href = "{%url 'show_post' post.pk %}">
+                    <img src = "{{post.get_first_photo.get_image_url}}" width = "200">
+                    </a>
+
+                    <p>{{post.caption}}, <br>
+                        Likes:
+                        {{post.get_like_count}}, <br>
+                        Comments:
+                        {% for comment in post.get_all_comments %}
+                            <li>{{comment}}</li>
+                        {% endfor %}
+                    </p>
+                </div>
+
+            {% else %}
+                <img src = "{{post.profile.profile_image_url}}" width = "200">
+                <p>{{post.profile.username}}'s post</p>
+
+                <a href = "{%url 'show_post' post.pk %}">
+                <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSKKzAcX4o85e8WqOLI80UB1H5sOOUlwW8XKy8EIxl3Q&s=10" height = "150" width = "150">
+                </a>
+
+                <p>{{post.caption}}, <br>
+                    Likes:
+                    {{post.get_like_count}}, <br>
+                    Comments:
+                    {% for comment in post.get_all_comments %}
+                        <li>{{comment}}</li>
+                    {% endfor %}
+                </p>
+
+            {% endif %}
+            <br>
         {% endfor %}
 </div>
 
