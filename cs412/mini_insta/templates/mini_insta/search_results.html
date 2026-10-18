@@ -1,0 +1,43 @@
+{%extends 'mini_insta/base.html' %}
+
+{%block content%}
+
+<html>
+    <h2>Profile Search Results:</h2>
+    <table>  
+        <tr>
+        {% for profile in profiles %}
+            <td>
+                <a href = "{%url 'show_profile' profile.pk %}">
+                <img src = "{{profile.profile_image_url}}" width = "200">
+                </a>
+            </td>
+        {%endfor%}
+        </tr>      
+
+        </table>
+
+    <h2>Post Search Results:</h2>
+    <table>
+        {% for post in posts %}
+            {% if post.get_first_photo %}
+                <tr>
+                    <a href = "{%url 'show_post' post.pk %}">
+                    <img src = "{{post.get_first_photo.get_image_url}}" width = "200">
+                    </a>
+                </tr>
+            {% else %}
+                <tr>
+                    <a href = "{%url 'show_post' post.pk %}">
+                    <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSKKzAcX4o85e8WqOLI80UB1H5sOOUlwW8XKy8EIxl3Q&s=10" height = "150" width = "150">
+                    </a>
+                </tr>
+            {% endif %}
+            <tr>
+                by {{post.profile}}
+            </tr>
+        {%endfor%}
+    </table>
+</html>
+
+{% endblock %}

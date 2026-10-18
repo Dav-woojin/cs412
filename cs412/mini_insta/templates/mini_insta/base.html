@@ -19,9 +19,50 @@
         {%endblock%}
     </body>
 
-    <nav>
-        {%if profile%}
-        <li><a href = "{%url 'create_post' profile.pk%}">Create a post</a></li>
-        {%endif%}
-    </nav>
+    <table>
+        <tr>
+            <td>
+                <nav>
+                    {%if profile%}
+                        <a href = "{%url 'show_feed' profile.pk%}">
+                        <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSfVkhTYUQX7ZkuJYHQQDFxgkDzjMI3akBdrHMXQ475Q&s=10" height = "50" width = "50">
+                        </a>
+                    {%else%}
+                        <a href = "{%url 'show_all_profiles' %}">
+                        <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSfVkhTYUQX7ZkuJYHQQDFxgkDzjMI3akBdrHMXQ475Q&s=10" height = "50" width = "50">
+                        </a>
+                    {%endif%}
+                </nav>
+            </td>
+
+            <td>
+                <nav>
+                    {%if profile%}
+                    <a href = "{%url 'create_post' profile.pk%}">
+                    <img src = " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJU1_GaDE0sHZo6UD7ZCr7t-QoFF-QBpF3TtXvFxIzGw&s=10" height = "50" width = "50">
+                    </a>
+                    {%endif%}
+                </nav>
+            </td>
+
+            <td>
+                {%if profile%}
+                <a href = "{%url 'search' profile.pk%}">
+                <img src = "data:image/png;base64,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" height = "50" width = "50">
+                </a>
+                {%endif%}
+            </td>
+
+            <td>
+                <nav>
+                    {%if profile%}
+                    <a href = "{%url 'show_profile' profile.pk%}">
+                    <img src = "{% url 'profile.profile_image_url'}" height = "50" width = "50">
+                    </a>
+                    {%endif%}
+                </nav>
+            </td>
+
+        </tr>
+    </table>
 </html>

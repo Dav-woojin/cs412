@@ -3,7 +3,7 @@
 #app, a show all page and individual show profile pages
 
 from django.urls import path
-from .views import ProfileListView, ProfileDetailView, PostDetailView, CreatePostView, UpdateProfileView, DeletePostView, UpdatePostView, ShowFollowersDetailView, ShowFollowingDetailView, ShowFeedView
+from .views import ProfileListView, ProfileDetailView, PostDetailView, CreatePostView, UpdateProfileView, DeletePostView, UpdatePostView, ShowFollowersDetailView, ShowFollowingDetailView, ShowFeedView, SearchView
 
 
 urlpatterns = [
@@ -16,5 +16,6 @@ urlpatterns = [
     path('post/<int:pk>/update', UpdatePostView.as_view(), name = 'update'),
     path('profile/<int:pk>/followers', ShowFollowersDetailView.as_view(), name = 'followers'),
     path('profile/<int:pk>/following', ShowFollowingDetailView.as_view(), name = 'following'),
-    path('profile/<int:pk>/feed', ShowFeedView.as_view(), name = "show_feed")
+    path('profile/<int:pk>/feed', ShowFeedView.as_view(), name = "show_feed"),
+    path('profile/<int:pk>/search', SearchView.as_view(), name = "search"),
 ]

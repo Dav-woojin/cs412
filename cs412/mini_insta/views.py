@@ -3,6 +3,7 @@
 #here we create classes for our models and their appropriate templates and context variables
 
 from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Profile, Post, Photo
@@ -93,7 +94,6 @@ class UpdatePostView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        pk = self.kwargs["pk"]
         post = self.object
 
         context['profile'] = post.profile
@@ -116,3 +116,43 @@ class ShowFollowingDetailView(DetailView):
 class ShowFeedView(DetailView):
     model = Profile
     template_name = "mini_insta/show_feed.html"
+
+class SearchView(ListView):
+    template_name = 'mini_insta/search_results.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        template = 'mini_insta/search.html'
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk = pk)
+        context = {"profile": profile}
+
+        if "query" in self.request.GET:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return render(request, template, context)
+        
+    def get_queryset(self):
+        res = Post.objects.filter(caption__contains = self.request.GET["query"])
+        return res
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk = pk)
+        if "query" in self.request.GET:
+            query = self.request.GET["query"]
+            context['query'] = query
+        context['posts'] = self.get_queryset()
+
+        profiles = set()
+        for p in Profile.objects.filter(username__contains = self.request.GET["query"]):
+            profiles.add(p)
+        for p in Profile.objects.filter(display_name__contains = self.request.GET["query"]):
+            profiles.add(p)
+        for p in Profile.objects.filter(bio_text__contains = self.request.GET["query"]):
+            profiles.add(p)
+        profile_list = list(profiles)
+        context['profiles'] = profile_list
+
+        return context
