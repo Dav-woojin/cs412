@@ -33,12 +33,10 @@
     {% endfor %} 
 
     <h4>
-        {{profile.get_num_followers}}
-        Followers
+        <a href = "{% url 'followers' profile.pk %}">{{profile.get_num_followers}} Followers</a>
     </h4>
     <h4>
-        {{profile.get_num_following}}
-        Following
+        <a href = "{% url 'following' profile.pk %}">{{profile.get_num_following}} Following</a>
     </h4>
     </article>
 

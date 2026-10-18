@@ -62,15 +62,18 @@ class CreatePostView(CreateView):
         return response
     
 class UpdateProfileView(UpdateView):
+    # This class manages the update profile functionality, giving the appropriate model, formclass and template
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_insta/update_profile_form.html'
     
 class DeletePostView(DeleteView):
+    # This class manages the delete post functionality, giving the appropriate model, formclass and template
     model = Post
     template_name = "mini_insta/delete_post_form.html"
 
     def get_context_data(self, **kwargs):
+        # We give back the profile and post data as context for a given post deletion
         context = super().get_context_data(**kwargs)
 
         pk = self.kwargs["pk"]
@@ -81,17 +84,20 @@ class DeletePostView(DeleteView):
         return context
     
     def get_success_url(self):
+        # this handles how the app should behave upon successful post deletion
         pk = self.kwargs["pk"]
         post = Post.objects.get(pk=pk)
         profile = post.profile
         return reverse('show_profile', kwargs={'pk': profile.pk })
     
 class UpdatePostView(UpdateView):
+    # this is the view to handle updating a post, with the appropriate model, formclass, and template name provided
     model = Post
     form_class = UpdatePostForm
     template_name = "mini_insta/update_post_form.html"
 
     def get_context_data(self, **kwargs):
+        # this method takes our current post object and gives the appropriate profile and post context
         context = super().get_context_data(**kwargs)
 
         post = self.object
@@ -101,19 +107,25 @@ class UpdatePostView(UpdateView):
         return context
     
     def get_success_url(self):
+        # this method handles where the application should go after successfully updating a post
         pk = self.kwargs["pk"]
         post = Post.objects.get(pk=pk)
         return reverse('show_post', kwargs={'pk': post.pk })
 
 class ShowFollowersDetailView(DetailView):
+    # This short class just determines the context object name and which template to go to for showing followers
+    model = Profile
     context_object_name = "profile"
     template_name = "mini_insta/show_followers.html"
 
 class ShowFollowingDetailView(DetailView):
+    # This short class just determines the context object name and which template to go to for showing followings
+    model = Profile
     context_object_name = "profile"
     template_name = "mini_insta/show_following.html"
 
 class ShowFeedView(DetailView):
+    # This short class just determines the context object name and which template to go to for showing a feed
     model = Profile
     template_name = "mini_insta/show_feed.html"
 

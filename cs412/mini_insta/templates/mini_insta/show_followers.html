@@ -1,0 +1,26 @@
+<!-- David Chung, dwjchung@bu.edu -->
+<!-- this the template used to handle getting all followers of a profile -->
+
+{%extends 'mini_insta/base.html' %}
+
+{%block content%}
+<html>
+    <h1>
+        Followers
+    </h1>
+    <ul>
+        {% for fprofile in profile.get_followers %}
+
+            <li>
+                <a href = "{% url 'show_profile' fprofile.follower_profile.pk %}">
+                <img src = "{{fprofile.follower_profile.profile_image_url}}" height = "250">
+                </a>
+                {{ fprofile.follower_profile}}
+
+            </li> 
+        {%endfor%}
+    </ul>
+</html>
+
+
+{%endblock%}
