@@ -1,0 +1,27 @@
+<!-- David Chung, dwjchung@bu.edu -->
+<!-- this the template used to handle updating a profile's data-->
+
+{%extends 'mini_insta/base.html' %}
+
+{%block content%}
+<h1>Create profile</h1>
+
+
+<form class="site-form" action="{% url 'create_profile_form' %}" method="post">
+    {% csrf_token %}
+
+    <h2>Profile Creation</h2>
+    {{form}}
+    <br>
+    <h2>User Creation</h2>
+    {{formU}}
+<input type="submit" name = "submit" value="Submit">
+ 
+</form>
+
+<form action = "{% url 'show_profile' %}" method = "GET">
+    <input type = "submit" value = "Cancel">
+
+</form>
+
+{% endblock %}

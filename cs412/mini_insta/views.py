@@ -7,9 +7,13 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
+from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm, CreateProfileForm
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+
 
 # Create your views here.
 class ProfileListView(ListView):
@@ -42,6 +46,10 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     # this is our main class for creating posts, associated with post form
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
+    
+    def get_object(self):
+        user = self.request.user
+        return Profile.objects.filter(user = user).first()
 
     def get_context_data(self):
         # function to get the right context data, based off which profile this post is being made for
@@ -194,3 +202,21 @@ class SearchView(LoginRequiredMixin, ListView):
         context['profiles'] = profile_list
 
         return context
+    
+class CreateProfileView(CreateView):
+    template_name = "mini_insta/create_profile_form.html"
+    form_class = CreateProfileForm
+    model = User
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        formU = UserCreationForm()
+        context['formU'] = formU
+        return context
+    
+    def form_valid(self, form):
+        newUser = UserCreationForm(self.request.POST)
+        user = newUser.save()
+        login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+        form.instance.user = user
+        return super().form_valid(form)
