@@ -81,6 +81,10 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
         user = self.request.user
         return Profile.objects.filter(user = user).first()
     
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('login')
+    
 class DeletePostView(LoginRequiredMixin, DeleteView):
     # This class manages the delete post functionality, giving the appropriate model, formclass and template
     model = Post
