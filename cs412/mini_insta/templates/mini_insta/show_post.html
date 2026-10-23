@@ -18,6 +18,14 @@
                 at {{post.timestamp}}</p>
         </div>
 
+        {% if request.user.is_authenticated and profile.user != request.user %}
+        <a href="{% url 'like' post.pk %}">Like</a>
+        {% endif %}
+
+        {% if request.user.is_authenticated and profile.user != request.user %}
+        <a href="{% url 'like_delete' post.pk %}">Delete Like</a>
+        {% endif %}
+
         <div>
             <h3>Comments:</h3>
             {% for comment in post.get_all_comments %}

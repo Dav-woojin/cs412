@@ -27,21 +27,27 @@ class Profile(models.Model):
         return posts
     
     def get_absolute_url(self):
+        # function created to appropriately direct users to the right profile
         return reverse("show_profile", kwargs = {'pk': self.pk})
     
     def get_followers(self):
+        # function to return all follower objects
         return Follow.objects.filter(profile = self)
     
     def get_num_followers(self):
+        # function to return the count of followers
         return len(Follow.objects.filter(profile = self))
     
     def get_following(self):
+        # function to get all the people that follow this account
         return Follow.objects.filter(follower_profile = self)
     
     def get_num_following(self):
+        # function to get count of people that follow this account
         return len(Follow.objects.filter(follower_profile = self))
     
     def get_post_feed(self):
+        # function to appropriately grab al the posts of people this account follows
         combined_result = Post.objects.none()
         following_profiles = Follow.objects.filter(follower_profile = self)
         for p in following_profiles:
@@ -78,12 +84,15 @@ class Post(models.Model):
         return reverse('show_post', kwargs={'pk': self.pk})
     
     def get_all_comments(self):
+        # grabs all comments for a certain post
         return Comment.objects.filter(post = self)
     
     def get_likes(self):
+        # gets all like instances of a post
         return Like.objects.filter(post = self)
     
     def get_like_count(self):
+        # counts all the likes for a post
         return len(Like.objects.filter(post = self))
     
 class Photo(models.Model):
@@ -110,6 +119,7 @@ class Follow(models.Model):
     timestamp = models.DateTimeField(auto_now = True)
 
     def __str__(self):
+        # str function to describe a follows relationship
         return f'{self.follower_profile} follows {self.profile}'
     
 class Comment(models.Model):
@@ -119,6 +129,7 @@ class Comment(models.Model):
     text = models.TextField(blank = True)
 
     def __str__(self):
+        # str function for a comment
         return f'{self.text}'
     
 
@@ -128,6 +139,7 @@ class Like(models.Model):
     timestamp = models.DateTimeField(auto_now = True)
 
     def __str__(self):
+        # str function for a like instance
         return f'{self.profile} likes {self.post}'
     
     

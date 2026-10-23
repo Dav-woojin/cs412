@@ -19,6 +19,14 @@
         </h3>
     {%endif%}
 
+    {% if request.user.is_authenticated and profile.user != request.user %}
+    <a href="{% url 'follow' profile.pk %}">Follow</a>
+    {% endif %}
+
+    {% if request.user.is_authenticated and profile.user != request.user %}
+    <a href="{% url 'follow_delete' profile.pk %}">Delete Follow</a>
+    {% endif %}
+
     <hr>
     <h4>{{profile.username}}'s posts</h4>
 
