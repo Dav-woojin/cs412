@@ -13,9 +13,12 @@
 
     <img src = "{{profile.profile_image_url}}">
 
-    <h3>
-        <a href = "{% url 'update_profile' profile.pk%}">Update Profile</a>
-    </h3>
+    {% if profile.user == request.user %}
+        <h3>
+            <a href = "{% url 'update_profile'%}">Update Profile</a>
+        </h3>
+    {%endif%}
+
     <hr>
     <h4>{{profile.username}}'s posts</h4>
 
@@ -50,9 +53,11 @@
         </div>
     </article>
 
-<nav>
-    <a href = "{% url 'show_feed' profile.pk %}">Feed</a>
-</nav>
+    {% if profile.user == request.user %}
+        <nav>
+            <a href = "{% url 'show_feed'%}">Feed</a>
+        </nav>
+    {%endif%}
 
 
 </main>

@@ -25,12 +25,18 @@
             {% endfor %}
         </div>
         <br>
-        <nav>
-            <a href = "{% url 'update' post.pk %}">Update Post</a>
-        </nav>
-        <nav>
-            <a href = "{% url 'delete' post.pk %}">Delete Post</a>
-        </nav>
+        {% if post.profile.user == request.user %}
+            <nav>
+                <a href = "{% url 'update' post.pk %}">Update Post</a>
+            </nav>
+        {% endif %}
+        
+        {% if post.profile.user == request.user %}
+            <nav>
+                <a href = "{% url 'delete' post.pk %}">Delete Post</a>
+            </nav>
+        {% endif %}
+
     </table>
     <hr>
 </main>
