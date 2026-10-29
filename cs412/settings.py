@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "cs412.mini_insta",
     "formdata",
     "blog",
+    "marathon_analytics",
+    "cs412.voter_analytics"
 ]
 
 MIDDLEWARE = [

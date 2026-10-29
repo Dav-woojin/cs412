@@ -99,6 +99,10 @@ class DeletePostView(LoginRequiredMixin, DeleteView):
     template_name = "mini_insta/delete_post_form.html"
 
     def get_context_data(self, **kwargs):
+        print("SELF PRINT", self)
+        print("SELF PRINT 1", self.kwargs)
+        print("SELF PRINT 2", self.object)
+        print("SELF PRINT 3", self.request)
         # We give back the profile and post data as context for a given post deletion
         context = super().get_context_data(**kwargs)
 
