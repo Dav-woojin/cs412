@@ -1,0 +1,56 @@
+{% extends 'voter_analytics/base.html' %}
+ 
+ 
+{% block content %}
+<div class="container">
+	<h1>Results</h1>
+    <div class="row">
+        <table>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Residential Address - Street Number</th>
+                <th>Residential Address - Street Name</th>
+                <th>Residential Address - Apartment Number</th>
+                <th>Residential Address - Zip Code</th>
+                <th>Date of Birth</th>
+                <!-- <th>Date of Registration</th> -->
+                <th>Party Affiliation</th>
+                <!-- <th>Precinct Number</th> -->
+                <!-- <th>v20state</th>
+                <th>v21town</th>
+                <th>v21primary</th>
+                <th>v22general</th>
+                <th>v23town</th> -->
+                <th>voter_score</th>
+            </tr>
+    
+            {% for r in voters %}
+            <tr>
+
+                <td>{{r.Last_Name}}</td>
+                <td>{{r.First_Name}}</td>
+                <td>{{r.RA_Street_Number}}</td>
+                <td>{{r.RA_Street_Name}}</td>
+                <td>{{r.RA_Apartment_Number}}</td>
+                <td>{{r.RA_Zip_Code}}</td>
+
+                <td>{{r.DOB}}</td>
+                <td>{{r.Party_Affiliation}}</td>
+                <!-- <td>{{r.Precinct_Number}}</td>
+                <td>{{r.v20state}}</td>
+                <td>{{r.v21town}}</td>
+                <td>{{r.v21primary}}</td>
+                <td>{{r.v22general}}</td>
+                <td>{{r.v23town}}</td> -->
+                <td>{{r.voter_score}}</td>
+             
+            </tr>
+            {% endfor %}
+    
+        </table>
+ 
+        </div>
+    </div>
+    
+{% endblock %}
