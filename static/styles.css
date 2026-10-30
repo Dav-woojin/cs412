@@ -28,7 +28,7 @@ body {
     padding: 20px auto;
 }
 
-header {
+/* header {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -36,8 +36,9 @@ header {
     position: fixed;
     top: 0px;
     z-index: 999;
-    /* padding-right: 50px auto; */
+
 }
+*/
 
 footer {
     width: 100%;
@@ -118,7 +119,7 @@ nav button {
     font-size: 1.2em;
 }
 
-.mc-table-head .detail {
+/* .mc-table-head .detail {
     display: table-cell;
     color:darkblue;
     font-weight: bold;
@@ -126,7 +127,7 @@ nav button {
     padding: 5px;
     position: relative;
    
-}
+} */
 
 .mc-table-row  {
     display: table-row;

@@ -3,6 +3,11 @@
  
 {% block content %}
 <div class="container">
+
+    <div class = "row">
+        {%include "voter_analytics/search.html" %}
+    </div>
+
 	<h1>Results</h1>
     <div class="row">
         <table>
@@ -27,8 +32,8 @@
     
             {% for r in voters %}
             <tr>
-
-                <td>{{r.Last_Name}}</td>
+                
+                <td><a href = "{%url 'voter_detail' r.pk %}">{{r.Last_Name}}</a></td>
                 <td>{{r.First_Name}}</td>
                 <td>{{r.RA_Street_Number}}</td>
                 <td>{{r.RA_Street_Name}}</td>

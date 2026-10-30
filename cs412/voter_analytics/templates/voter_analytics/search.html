@@ -1,0 +1,149 @@
+<div class="container">
+    <!-- form to filter some group -->
+    <form action="{% url 'voters' %}">
+        <div class="row">        
+        <table>
+            <tr>
+                <th>
+                    Select Party Affiliation:
+                </th>
+                <td>
+                    <!-- create select for party affiliations -->
+                    <select name="party_affiliation">
+                        <option value="" selected disabled hidden>Choose</option>
+                        {%for p in party_affils %}
+                            {% if request.GET.party_affiliation == p %}
+                                <option value= "{{p}}" selected>{{p}}</option>
+                            {%else%}
+                                <option value="{{p}}">{{p}}</option>        
+                            {% endif %}
+                        {% endfor %}
+                            
+                        
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Select Voter Score:
+                </th>
+                <td>
+                    <!-- create select for voter score -->
+                    <select name="voter_score">
+                        <option value="" selected disabled hidden>Choose</option>
+                            {% for v in voterscores %}
+                                {% if request.GET.voter_score == v %}
+                                    <option value= "{{v}}" selected >{{v}}</option>
+                                {%else%}
+                                    <option value= "{{v}}" >{{v}}</option>
+                                {%endif%}
+                                
+                            {%endfor%}
+                            
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Min Year of Birth:
+                </th>
+                <td>
+                    <!-- create select for dob_year_options -->
+                    <select name="min_dob_year">
+                        <option value="" selected disabled hidden>Choose</option>
+                            {% for y in years %}
+                                {% if request.GET.min_dob_year == y %}
+                                    <option value= "{{y}}" selected >{{y}}</option>
+                                {%else%}
+                                    <option value= "{{y}}" >{{y}}</option>
+                                {%endif%}
+                                
+                            {%endfor%}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Max Year of Birth:
+                </th>
+
+                <td>
+                    <!-- create select for dob_year_options -->
+                    <select name="max_dob_year">
+                        <option value="" selected disabled hidden>Choose</option>
+                            {% for y in years %}
+                                {% if request.GET.max_dob_year == y %}
+                                    <option value= "{{y}}" selected >{{y}}</option>
+                                {%else%}
+                                    <option value= "{{y}}" >{{y}}</option>
+                                {%endif%}
+                                
+                            {%endfor%}
+                            
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Previous Election Participation
+                </th>
+                <td>
+                    
+                    
+                    {% if request.GET.v20state %}
+                        <input type="checkbox" name="v20state" checked>v20state<br>
+                    {%else%}
+                        <input type="checkbox" name="v20state" >v20state<br>
+                    {%endif%}
+
+                    {% if request.GET.v21town %}
+                        <input type="checkbox" name="v21town" checked>v21town<br>
+                    {%else%}
+                        <input type="checkbox" name="v21town" >v21town<br>
+                    {%endif%}
+
+                    {% if request.GET.v21primary %}
+                        <input type="checkbox" name="v21primary" checked>v21primary<br>
+                    {%else%}
+                        <input type="checkbox" name="v21primary" >v21primary<br>
+                    {%endif%}
+                    
+                    {% if request.GET.v22general %}
+                        <input type="checkbox" name="v22general" checked>v22general<br>
+                    {%else%}
+                        <input type="checkbox" name="v22general" >v22general<br>
+                    {%endif%}
+                    
+                    {% if request.GET.v23town %}
+                        <input type="checkbox" name="v23town" checked>v23town<br>
+                    {%else%}
+                        <input type="checkbox" name="v23town" >v23town<br>
+                    {%endif%}
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Submit">
+                    </form>
+
+                    <form action="{% url 'voters'%}">
+                    <input type="submit" value="Cancel">
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+                
+        </div>
+
+        <div class="row">   
+            
+        </div>
+    
+
+
+</div>

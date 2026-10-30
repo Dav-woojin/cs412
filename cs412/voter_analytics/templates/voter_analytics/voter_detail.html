@@ -1,0 +1,43 @@
+{% extends 'voter_analytics/base.html' %}
+ 
+ 
+{% block content %}
+<div class="container">
+    <h1>Showing Result for {{v.First_Name}} {{v.Last_Name}}</h1>
+    <table>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Voter Registration Date</th>
+            <th>v20state</th>
+            <th>v21town</th>
+            <th>v21primary</th>
+            <th>v22general</th>
+            <th>v23town</th>
+        </tr>
+
+        <tr>
+            
+            <td>{{v.Last_Name}}</td>
+            <td>{{v.First_Name}}</td>
+            <td>{{v.DOR}}</td>
+            <td>{{v.v20state}}</td>
+            <td>{{v.v21town}}</td>
+            <td>{{v.v21primary}}</td>
+            <td>{{v.v22general}}</td>
+            <td>{{v.v23town}}</td>
+            
+        </tr>
+
+    </table>
+
+    <h3>
+    <a href = "https://www.google.com/maps?q={{ v.RA_Street_Number }}+{{ v.RA_Street_Name|urlencode }}+{{ v.RA_Zip_Code }}">
+        Link to Address
+    </a>
+    </h3>
+
+</div>
+ 
+ 
+{% endblock %}
