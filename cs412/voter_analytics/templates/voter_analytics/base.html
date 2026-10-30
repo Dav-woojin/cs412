@@ -1,3 +1,7 @@
+<!-- David Chung, dwjchung@bu.edu -->
+<!-- this is our base.html file, used to provide navigation, pagination, and load a css file for all pages -->
+
+
 {% load static %}
 <html>
     <head>
@@ -32,6 +36,9 @@
             <nav>
                 <ul>
                     <li><a href="{% url 'voters' %}">Home</a></li>
+                </ul>
+                <ul>
+                    <li><a href="{% url 'graphs' %}">Graphs</a></li>
                 </ul>
  
             </nav>

@@ -1,3 +1,5 @@
+# views.py file, where most of our application logic will live
+
 from django.shortcuts import render
 
 from django.db.models.query import QuerySet
@@ -13,12 +15,14 @@ import plotly.graph_objs as go
 # Create your views here.
 
 class ResultsListView(ListView):
+    # resultslistview responsible for main page logic
     model = Voter
     template_name = 'voter_analytics/voters.html'
     context_object_name = 'voters'
     paginate_by = 100
 
     def get_queryset(self):
+        # get_queryset handles the filter criteria we find in our url, and appropriately filters the results by those filters
         results = super().get_queryset()
 
         if 'party_affiliation' in self.request.GET:
@@ -69,8 +73,8 @@ class ResultsListView(ListView):
         return results
 
     def get_context_data(self, **kwargs):
+        # our get context data simplifies the work for our search, provides a key/value for each criteria
         context = super().get_context_data(**kwargs)
-        # context["filter"] = self.request.GET
         context["party_affils"] = ['U ', 'D ', 'R ', 'J ', 'A ', 'CC', 'X ', 'L ', 'Q ', 'S ', 'FF', 'G ', 'HH', 'T ', 'AA', 'GG', 'Z ', 'O ', 'P ', 'E ', 'V ', 'H ', 'Y ', 'W ', 'EE', 'K ']
         context['voterscores'] = ['0','1','2','3','4','5']
         context["years"] = [str(y) for y in range(1920, 2004)]
@@ -78,15 +82,18 @@ class ResultsListView(ListView):
         return context
 
 class ResultDetailView(DetailView):
+    # view for a single voter detail, just passes template name, model and context object
     model = Voter
     context_object_name = 'v'
     template_name = "voter_analytics/voter_detail.html"
 
 class GraphListView(ListView):
+    # view for a graph
     model = Voter
     template_name = "voter_analytics/graphs.html"
 
     def get_queryset(self):
+        # copied pasted from resultslistview, here in order to have the same filter functionality and filter our results
         results = super().get_queryset()
 
         if 'party_affiliation' in self.request.GET:
@@ -138,6 +145,7 @@ class GraphListView(ListView):
         return results
 
     def get_context_data(self, **kwargs):
+        # context data to bring some data for filtering, and also build our three graphs
         context = super().get_context_data(**kwargs)
         context["party_affils"] = ['U ', 'D ', 'R ', 'J ', 'A ', 'CC', 'X ', 'L ', 'Q ', 'S ', 'FF', 'G ', 'HH', 'T ', 'AA', 'GG', 'Z ', 'O ', 'P ', 'E ', 'V ', 'H ', 'Y ', 'W ', 'EE', 'K ']
         context['voterscores'] = ['0','1','2','3','4','5']

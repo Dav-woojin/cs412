@@ -1,3 +1,5 @@
+# apps.py file to register this project
+
 from django.apps import AppConfig
 
 

@@ -1,3 +1,4 @@
+# urls.py file, define our paths for voter and graph and our main page
 from django.urls import path
 from .views import ResultsListView, ResultDetailView, GraphListView
 

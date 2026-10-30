@@ -1,3 +1,12 @@
+<!-- David Chung, dwjchung@bu.edu -->
+<!-- this is our graphs.html file, used to render graphs -->
+
+
+{% extends 'voter_analytics/base.html' %}
+ 
+ 
+{% block content %}
+
 <div class = "row">
     {%include "voter_analytics/search.html" %}
 </div>
@@ -9,3 +18,5 @@
 
     {{graph_div_elect|safe}}
 </div>
+
+{%endblock%}

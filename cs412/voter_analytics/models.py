@@ -1,3 +1,4 @@
+# models file, to define a voter class and have logic to load the data of the voters file into our app
 from django.db import models
 
 # Create your models here.
@@ -21,20 +22,23 @@ class Voter(models.Model):
     v23town = models.TextField(max_length=5, default='', blank=True)
     voter_score = models.IntegerField()
 
+    def __str__(self):
+        # str function just presents each voter by first and last name
+        return f'{self.First_Name} {self.Last_Name}'
+
 def load_data():
+    # load data function reads file
     filename = "/Users/davidchung/Downloads/newton_voters.csv"
     f = open(filename, 'r')
 
     for i in range(5):
         line = f.readline()
         fields = line.strip().split(',')
-        # for j in range(len(fields)):
-        #     print(f'fields[{j}] = {fields[j]}')
     try:
+        # for each line, read in fields
         for line in f:
             line = f.readline().strip()
             fields = line.split(",")
-            # print(fields)
             result = Voter(
                     Last_Name=fields[1],
                     First_Name=fields[2],
@@ -58,12 +62,8 @@ def load_data():
                     )
 
             result.save()
-            # print(f'Created result: {result}')
-            # print(line)
-    # except:
-    #     print("Something went wrong")
-    #     print(f"line = {line}")
     except Exception as e:
+        # catch errors
         print(f"Something went wrong: {e!r}")
         print(f"line = {line}")
     print(f"Done. Created {len(Voter.objects.all())} results")
