@@ -1,6 +1,7 @@
 <div class="container">
     <!-- form to filter some group -->
-    <form action="{% url 'voters' %}">
+    <!-- <form action="{% url 'voters' %}"> -->
+    <form method = "GET">
         <div class="row">        
         <table>
             <tr>
@@ -130,7 +131,8 @@
                     <input type="submit" value="Submit">
                     </form>
 
-                    <form action="{% url 'voters'%}">
+                    <!-- <form action="{% url 'voters'%}"> -->
+                    <form method = "GET">
                     <input type="submit" value="Cancel">
                     </form>
                 </td>

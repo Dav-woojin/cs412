@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import ResultsListView, ResultDetailView
+from .views import ResultsListView, ResultDetailView, GraphListView
 
 urlpatterns = [
     path('', ResultsListView.as_view(), name = "voters"),
-    path('voter/<int:pk>', ResultDetailView.as_view(), name = "voter_detail")
+    path('voter/<int:pk>', ResultDetailView.as_view(), name = "voter_detail"),
+    path('graphs', GraphListView.as_view(), name = "graphs")
 ]
