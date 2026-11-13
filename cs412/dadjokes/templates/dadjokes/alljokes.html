@@ -1,0 +1,19 @@
+{%extends 'dadjokes/base.html' %}
+
+{%block content%}
+
+<main class = "grid-container">
+    {%for joke in jokes%}
+    <article>
+        <div>
+            <p>{{joke.text}}</p>
+            <p>by {{joke.name}}</p><br>
+        </div>
+
+        
+    </article>
+    <!-- <hr> -->
+    {%endfor%}
+</main>
+
+{%endblock%}

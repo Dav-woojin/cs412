@@ -1,0 +1,18 @@
+{%extends 'dadjokes/base.html' %}
+
+{%block content%}
+
+<main class = "grid-container">
+    {%for picture in pictures%}
+    <article>
+        <div>
+            <img src = '{{picture.image_url}}' height = "300" width = "300"><br>
+            <p>{{picture.name}}</p><br>
+        </div>
+
+        
+    </article>
+    {%endfor%}
+</main>
+
+{%endblock%}

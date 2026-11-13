@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     "formdata",
     "blog",
     "marathon_analytics",
-    "cs412.voter_analytics"
+    "cs412.voter_analytics",
+    "cs412.dadjokes",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -160,3 +162,8 @@ if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
