@@ -1,3 +1,5 @@
+# David Chung, dwjchung@bu.edu
+# joke and picture models
 from django.db import models
 
 # Create your models here.

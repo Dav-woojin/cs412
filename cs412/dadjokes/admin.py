@@ -1,3 +1,5 @@
+# David Chung, dwjchung@bu.edu
+# file to register joke and picture models to admin
 from django.contrib import admin
 
 # Register your models here.
