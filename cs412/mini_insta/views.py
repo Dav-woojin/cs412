@@ -12,7 +12,18 @@ from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, AllowAny
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.exceptions import NotFound
+
+from rest_framework import generics
+from .serializers import *
+
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -312,3 +323,109 @@ class LikeDelete(LoginRequiredMixin, TemplateView):
 
 
         return render(request, template, context)
+
+
+# Reading a profile or a list of profiles.
+
+# Reading posts (and pictures) for one profile.
+
+# Reading a feed for one profile (i.e., similar to the 'profile/<int:pk>/feed' URL from the web version of mini_insta)
+
+# Creating a post.
+class ProfileAPIView(generics.RetrieveAPIView):
+    # profile API view checks user token
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    authentication_classes = [TokenAuthentication]
+
+    def get_permissions(self):
+        # needed get_permissions method to have a permission check when users try to access profiles without logging in
+        if 'pk' in self.kwargs:
+            return [AllowAny()] 
+        return [IsAuthenticated()] 
+
+    def get_object(self):
+        # get object just gets our user
+        if 'pk' in self.kwargs:
+            return super().get_object()
+        else:
+            user = self.request.user
+            return Profile.objects.filter(user = user).first()
+
+
+class ProfileListAPIView(generics.ListCreateAPIView):
+    # profile list api view should be viewable for everyone, so we allow any request for permissions and do not need to check authentication
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+    
+class PostAPIView(generics.ListAPIView):
+    # Post api view should only be viewable/accessible by the appropriate logged in user, so we check through token as well as isauthenticated
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # get the posts that belong to our current profile
+        user = self.request.user
+        profile = Profile.objects.filter(user = user).first()
+        return Post.objects.filter(profile=profile)
+
+
+class FeedAPIView(generics.ListAPIView):
+    # feed api view should only be accessible by appropriate logged in user, so for this as well, check token and if user is authenticated, if not logged in though, they can read the feed
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    # def get_object(self):
+    #     user = self.request.user
+    #     return Profile.objects.filter(user = user).first()
+
+    def get_queryset(self):
+        # gets all posts associated with the following profiles of our profile
+        combined_result = Post.objects.none()
+        following_profiles = Follow.objects.filter(follower_profile = self.kwargs["pk"])
+        for p in following_profiles:
+            combined_result = combined_result | Post.objects.filter(profile = p.profile)
+        return combined_result
+
+class CreatePostAPIView(generics.CreateAPIView):
+    # create post api view makes sure only authenticated profiles can make a post for their profile
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def perform_create(self, serializer):
+        # retrieves appropriate profile for creating a post
+        profile = get_object_or_404(Profile, pk=self.request.data.get('profile_id'), user=self.request.user)
+        serializer.save(profile=profile)
+
+class LoginAPIView(APIView):
+    """Validate credentials, return a token."""
+    # Nobody has a token yet, so open this view up
+    # code here largely based on template from class slides
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    def post(self, request):
+        user = authenticate(
+                            request,
+                            username=request.data.get('username'),
+                            password=request.data.get('password'),
+                            )
+        # gets user data before returning the associated token and profiles (profiles in case there are still multiple profiles attached to same user from testing miniinsta earlier in the semester)
+        if user:
+            token, _ = Token.objects.get_or_create(user=user)
+            profiles = Profile.objects.filter(user=user).order_by('id')
+            return Response({
+                'token': token.key,
+                'user': {'id': user.id, 'username': user.username},
+                'profiles': ProfileSerializer(profiles, many=True).data,
+            })
+        return Response({'error': 'Invalid credentials'}, status=401)
+

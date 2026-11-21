@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "cs412.voter_analytics",
     "cs412.dadjokes",
     "rest_framework",
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

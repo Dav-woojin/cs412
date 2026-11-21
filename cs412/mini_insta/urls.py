@@ -3,7 +3,7 @@
 #app, a show all page and individual show profile pages
 
 from django.urls import path
-from .views import ProfileListView, ProfileDetailView, PostDetailView, CreatePostView, UpdateProfileView, DeletePostView, UpdatePostView, ShowFollowersDetailView, ShowFollowingDetailView, ShowFeedView, SearchView, CreateProfileView, FollowSelect, FollowDelete, LikeSelect, LikeDelete
+from .views import *
 
 from django.contrib.auth import views as auth_views
 
@@ -38,6 +38,14 @@ urlpatterns = [
     path('profile/<int:pk>/delete_follow', FollowDelete.as_view(), name = "follow_delete"),
 
     path('post/<int:pk>/like', LikeSelect.as_view(), name = "like"),
-    path('post/<int:pk>/delete_like', LikeDelete.as_view(), name = "like_delete")
+    path('post/<int:pk>/delete_like', LikeDelete.as_view(), name = "like_delete"),
 
+    # all api paths
+    path(r'api/profile', ProfileAPIView.as_view()),
+    path(r'api/profilelist', ProfileListAPIView.as_view()),
+    path(r'api/post', PostAPIView.as_view()),
+    path(r'api/profile/<int:pk>/feed', FeedAPIView.as_view()),
+    path(r'api/post/create', CreatePostAPIView.as_view()),
+
+    path(r'api/login', LoginAPIView.as_view()),
 ]
