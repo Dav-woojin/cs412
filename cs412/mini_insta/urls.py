@@ -41,6 +41,7 @@ urlpatterns = [
     path('post/<int:pk>/delete_like', LikeDelete.as_view(), name = "like_delete"),
 
     # all api paths
+    path(r'api', ProfileAPIView.as_view()),
     path(r'api/profile', ProfileAPIView.as_view()),
     path(r'api/profilelist', ProfileListAPIView.as_view()),
     path(r'api/post', PostAPIView.as_view()),
